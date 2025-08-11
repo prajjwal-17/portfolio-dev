@@ -12,7 +12,7 @@ export default function Terminal() {
   const terminalEndRef = useRef(null);
   const welcomeMessage = `Hi, I'm Prajjwal Rawat, a Web Developer & Tech Enthusiast.
 Welcome to my interactive portfolio terminal!
-Type 'help' to see available commands.`;
+Type 'help' to see available commands. You can also directly run commands by clicking on section on top.`;
 
   useEffect(() => {
     terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -193,9 +193,33 @@ Download: <a href="https://drive.google.com/file/d/17IqU41qBD-CEP85HaqdOMvES38lY
 
   return (
     <div className="h-full flex flex-col bg-black text-green-400 font-mono text-sm border border-green-600 rounded-lg overflow-hidden">
-      <div className="bg-black border-b border-green-600 p-2 text-green-400">
-        help | about | projects | skills | experience | contact | education | certifications | milestones | resume | clear
-      </div>
+     <div className="bg-black border-b border-green-600 p-2 text-green-400">
+  {[
+    "help",
+    "about",
+    "projects",
+    "skills",
+    "experience",
+    "contact",
+    "education",
+    "certifications",
+    "milestones",
+    "resume",
+    "clear"
+  ].map((cmd, idx, arr) => (
+    <span key={cmd}>
+      <button
+        onClick={() => handleCommand(cmd)}
+        className="hover:text-blue-400 underline-offset-2 hover:underline"
+      >
+        {cmd}
+      </button>
+      {idx < arr.length - 1 && " | "}
+    </span>
+  ))}
+</div>
+
+
       <div
         className="flex-1 overflow-y-auto p-3 whitespace-pre-wrap leading-relaxed"
         onClick={() => terminalInputRef.current.focus()}
