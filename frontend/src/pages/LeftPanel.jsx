@@ -264,7 +264,7 @@ export default function LeftPanel() {
             {/* Content slightly lifted */}
             <div className="space-y-3 text-center" style={{ transform: "translateZ(18px)" }}>
               <div className="border-b border-gray-600 pb-2">
-                <div className="text-gray-300 text-sm font-semibold tracking-wide">PRAJJWAL</div>
+                <div className="text-gray-300 text-sm font-semibold tracking-wide">PRAJJWAL RAWAT</div>
               </div>
               <div className="pb-2">
                 <div className="text-gray-400 text-sm font-medium">WEB DEVELOPER</div>
