@@ -149,7 +149,7 @@ clear           - Clear terminal screen`;
 📸 Instagram : <a href="https://www.instagram.com/prajjwal_17_/" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">instagram.com/prajjwal_17_</a>`;
     } else if (command === "resume") {
       output = `📄 Resume Details:
-Last Updated: <span style="color:#00ff00;">August 15, 2023</span>
+Last Updated: <span style="color:#00ff00;">July 15, 2025</span>
 Download: <a href="https://drive.google.com/file/d/17IqU41qBD-CEP85HaqdOMvES38lYHWD0/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">https://drive.google.com/file/d/17IqU41qBD-CEP85HaqdOMvES38lYHWD0/view?usp=sharingf</a>`;
     } else if (command === "milestones") {
       output = milestones
