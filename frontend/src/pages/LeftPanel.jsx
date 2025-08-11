@@ -204,91 +204,101 @@ export default function LeftPanel() {
     window.addEventListener("pointerup", onUp);
   };
 
-  return (
+return (
+  <div
+    className="min-h-screen bg-black flex flex-col justify-start items-center pt-6"
+    style={{ perspective: 1200, userSelect: "none", touchAction: "none" }}
+  >
+    {/* Swing container: strap + card rotate together around top-center */}
     <div
-      className="min-h-screen bg-black flex justify-center items-start pt-6"
-      style={{ perspective: 1200, userSelect: "none", touchAction: "none" }}
+      ref={swingRef}
+      style={{
+        transformOrigin: "center top",
+        transformStyle: "preserve-3d",
+        willChange: "transform",
+      }}
     >
-      {/* Swing container: strap + card rotate together around top-center */}
-      <div
-        ref={swingRef}
-        style={{
-          transformOrigin: "center top",
-          transformStyle: "preserve-3d",
-          willChange: "transform",
-        }}
-      >
-        {/* Strap area */}
-        <div className="flex flex-col items-center select-none">
-          {/* Connector knob */}
-          <div
-            className="w-6 h-6 bg-gray-400 rounded-full shadow-md"
-            style={{ transformStyle: "preserve-3d", translateZ: "4px" }}
-          />
-          {/* Visible strap (thicker, shorter) - pointer down attached */}
-          <div
-            onPointerDown={handlePointerDown}
-            className="w-6 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-500"
-            style={{ height: 120, cursor: "grab" }}
-          />
-        </div>
-
-        {/* Card */}
+      {/* Strap area */}
+      <div className="flex flex-col items-center select-none">
+        {/* Connector knob */}
+        <div
+          className="w-6 h-6 bg-gray-400 rounded-full shadow-md"
+          style={{ transformStyle: "preserve-3d", translateZ: "4px" }}
+        />
+        {/* Visible strap (thicker, shorter) - pointer down attached */}
         <div
           onPointerDown={handlePointerDown}
-          className="relative w-80 h-96 mt-2 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border border-gray-600 shadow-2xl cursor-grab active:cursor-grabbing"
-          style={{ transformStyle: "preserve-3d", userSelect: "none", touchAction: "none" }}
+          className="w-6 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-500"
+          style={{ height: 120, cursor: "grab" }}
+        />
+      </div>
+
+      {/* Card */}
+      <div
+        onPointerDown={handlePointerDown}
+        className="relative w-80 h-96 mt-2 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border border-gray-600 shadow-2xl cursor-grab active:cursor-grabbing"
+        style={{ transformStyle: "preserve-3d", userSelect: "none", touchAction: "none" }}
+      >
+        {/* Lifted header (3D parallax) */}
+        <div
+          className="bg-gradient-to-r from-blue-600 to-purple-600 h-8 rounded-t-lg flex items-center justify-center"
+          style={{ transform: "translateZ(26px)" }}
         >
-          {/* Lifted header (3D parallax) */}
-          <div
-            className="bg-gradient-to-r from-blue-600 to-purple-600 h-8 rounded-t-lg flex items-center justify-center"
-            style={{ transform: "translateZ(26px)" }}
-          >
-            <div className="text-white font-bold text-xs tracking-wider">IDENTIFICATION</div>
-          </div>
-
-          <div className="p-4 text-white">
-            {/* Photo lifted */}
-            <div
-              className="w-32 h-40 mx-auto mb-4 rounded-lg overflow-hidden border-2 border-gray-500 shadow-inner"
-              style={{ transform: "translateZ(32px)" }}
-            >
-              <img
-                src="/prajjwal.png"
-                alt="Profile"
-                className="w-full h-full object-cover"
-                style={{ display: "block", backfaceVisibility: "hidden" }}
-              />
-            </div>
-
-            {/* Content slightly lifted */}
-            <div className="space-y-3 text-center" style={{ transform: "translateZ(18px)" }}>
-              <div className="border-b border-gray-600 pb-2">
-                <div className="text-gray-300 text-sm font-semibold tracking-wide">PRAJJWAL RAWAT</div>
-              </div>
-              <div className="pb-2">
-                <div className="text-gray-400 text-sm font-medium">WEB DEVELOPER</div>
-              </div>
-            </div>
-
-            <div className="mt-4 flex justify-center" style={{ transform: "translateZ(12px)" }}>
-              <div className="w-8 h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-sm opacity-60" />
-            </div>
-          </div>
-
-          {/* subtle holographic overlay */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              pointerEvents: "none",
-              background: "linear-gradient(135deg, rgba(255,255,255,0.02), transparent)",
-              borderRadius: "0.5rem",
-              transform: "translateZ(6px)",
-            }}
-          />
+          <div className="text-white font-bold text-xs tracking-wider">IDENTIFICATION</div>
         </div>
+
+        <div className="p-4 text-white">
+          {/* Photo lifted */}
+          <div
+            className="w-32 h-40 mx-auto mb-4 rounded-lg overflow-hidden border-2 border-gray-500 shadow-inner"
+            style={{ transform: "translateZ(32px)" }}
+          >
+            <img
+              src="/prajjwal.png"
+              alt="Profile"
+              className="w-full h-full object-cover"
+              style={{ display: "block", backfaceVisibility: "hidden" }}
+            />
+          </div>
+
+          {/* Content slightly lifted */}
+          <div className="space-y-3 text-center" style={{ transform: "translateZ(18px)" }}>
+            <div className="border-b border-gray-600 pb-2">
+              <div className="text-gray-300 text-sm font-semibold tracking-wide">
+                PRAJJWAL RAWAT
+              </div>
+            </div>
+            <div className="pb-2">
+              <div className="text-gray-400 text-sm font-medium">WEB DEVELOPER</div>
+            </div>
+          </div>
+
+          <div className="mt-4 flex justify-center" style={{ transform: "translateZ(12px)" }}>
+            <div className="w-8 h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-sm opacity-60" />
+          </div>
+        </div>
+
+        {/* subtle holographic overlay */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            background: "linear-gradient(135deg, rgba(255,255,255,0.02), transparent)",
+            borderRadius: "0.5rem",
+            transform: "translateZ(6px)",
+          }}
+        />
       </div>
     </div>
-  );
+
+    {/* Instruction text */}
+    <div
+      className="mt-4 text-gray-500 text-sm text-center select-none"
+      style={{ transform: "translateZ(8px)" }}
+    >
+      [click on it to interact with 3D model]
+    </div>
+  </div>
+);
 }
