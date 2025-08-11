@@ -21,13 +21,13 @@ export default function App() {
 
       {/* MAIN CONTENT */}
       <div className="flex flex-1 min-h-0">
-        {/* LEFT BOX */}
-        <div className="w-1/2 border-r border-green-600 overflow-y-auto min-h-0 p-4">
+        {/* LEFT BOX - hidden on mobile */}
+        <div className="hidden md:block md:w-1/2 border-r border-green-600 overflow-y-auto min-h-0 p-4">
           <LeftPanel />
         </div>
 
-        {/* RIGHT BOX */}
-        <div className="w-1/2 overflow-y-auto min-h-0 p-4">
+        {/* RIGHT BOX - full width on mobile */}
+        <div className="w-full md:w-1/2 overflow-y-auto min-h-0 p-4">
           <Terminal />
         </div>
       </div>
