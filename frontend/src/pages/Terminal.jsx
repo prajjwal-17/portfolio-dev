@@ -3,16 +3,20 @@ import projects from "../utils/projects";
 import certifications from "../utils/certifications";
 import experience from "../utils/experience";
 import skills from "../utils/skills";
+import milestones from "../utils/milestones"; // Ensure this is the correct path and file name
 
 export default function Terminal() {
   const [history, setHistory] = useState([]);
   const terminalInputRef = useRef(null);
   const typingQueue = useRef(Promise.resolve());
-
+  const terminalEndRef = useRef(null);
   const welcomeMessage = `Hi, I'm Prajjwal Rawat, a Web Developer & Tech Enthusiast.
-
-Welcome to my interactive 'AI powered' portfolio terminal!
+Welcome to my interactive portfolio terminal!
 Type 'help' to see available commands.`;
+
+  useEffect(() => {
+    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [history]);
 
   const typeOutput = (text) => {
     const lines = text.split("\n");
@@ -22,7 +26,6 @@ Type 'help' to see available commands.`;
           new Promise((resolve) => {
             let currentLine = "";
             let i = 0;
-
             const typeChar = () => {
               if (i < line.length) {
                 currentLine += line[i];
@@ -39,7 +42,7 @@ Type 'help' to see available commands.`;
                   return newHistory;
                 });
                 i++;
-                setTimeout(typeChar, 8);
+                setTimeout(typeChar, 3);
               } else {
                 setHistory((prev) => {
                   const newHistory = [...prev];
@@ -54,7 +57,6 @@ Type 'help' to see available commands.`;
                 resolve();
               }
             };
-
             setHistory((prev) => [...prev, { type: "typing", text: "" }]);
             typeChar();
           })
@@ -65,7 +67,6 @@ Type 'help' to see available commands.`;
   const handleCommand = (command) => {
     setHistory((prev) => [...prev, { type: "command", text: command }]);
     let output = "";
-
     if (command === "help") {
       output = `Available commands:
 about           - Learn about me
@@ -76,9 +77,10 @@ education       - View my academic history
 skills          - See my technical skills
 contact         - View my contact details
 resume          - View my resume details
+milestones      - View my milestones and honors
 clear           - Clear terminal screen`;
     } else if (command === "about") {
-      output = "Hi, I'm Prajjwal Rawat, a Web Developer & Tech Enthusiast.";
+      output = "I’m Prajjwal Rawat, an aspiring Full-Stack Web Developer with a solid foundation in React, JavaScript, and the MERN stack, driven by a passion for creating intuitive, high-performance web applications. Currently pursuing my B.Tech in Computer Science at SRM University with a 9.43 GPA, I combine strong academic performance with hands-on project experience to deliver solutions that are both technically robust and user-centric. My goal is to leverage my skills to develop innovative products that solve real-world problems and elevate user experiences.";
     } else if (command === "welcome") {
       output = welcomeMessage;
     } else if (command === "projects") {
@@ -125,7 +127,6 @@ clear           - Clear terminal screen`;
    Class 10    : 95%
    Class 11    : 97.6%
    Duration    : April 2009 - May 2023
-
 2. 🎓 SRM Institute of Science and Technology, Kattankulathur
    Degree      : Bachelor of Technology (B.Tech)
    Major       : Computer Science & Engineering
@@ -141,16 +142,28 @@ clear           - Clear terminal screen`;
 • Concepts              : ${skills.concepts.join(", ")}`;
     } else if (command === "contact") {
       output = `Contact Details:
-📞 Phone : <a href="tel:+1234567890" style="color:#00afff; text-decoration: underline;">+1 234 567 890</a>
-📧 Email : <a href="mailto:example@email.com" style="color:#00afff; text-decoration: underline;">example@email.com</a>
-🔗 LinkedIn : <a href="https://linkedin.com/in/username" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">linkedin.com/in/username</a>
-💻 GitHub : <a href="https://github.com/username" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">github.com/username</a>
-📸 Instagram : <a href="https://instagram.com/username" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">instagram.com/username</a>`;
+📞 Phone : <a href="tel:+918433244827" style="color:#00afff; text-decoration: underline;">+91 8433244827</a>
+📧 Email : <a href="mailto:prajjwalrawat1711@gmail.com" style="color:#00afff; text-decoration: underline;">prajjwalrawat1711@gmail.com</a>
+🔗 LinkedIn : <a href="https://www.linkedin.com/in/prajjwal-rawat-886151278/" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">linkedin.com/in/prajjwal-rawat-886151278</a>
+💻 GitHub : <a href="https://github.com/prajjwal-17" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">https://github.com/prajjwal-17</a>
+📸 Instagram : <a href="https://www.instagram.com/prajjwal_17_/" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">instagram.com/prajjwal_17_</a>`;
     } else if (command === "resume") {
       output = `📄 Resume Details:
 Last Updated: <span style="color:#00ff00;">August 15, 2023</span>
-
-Download: <a href="https://example.com/resume.pdf" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">https://example.com/resume.pdf</a>`;
+Download: <a href="https://drive.google.com/file/d/17IqU41qBD-CEP85HaqdOMvES38lYHWD0/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">https://drive.google.com/file/d/17IqU41qBD-CEP85HaqdOMvES38lYHWD0/view?usp=sharingf</a>`;
+    } else if (command === "milestones") {
+      output = milestones
+        .map((milestone, i) => {
+          let str = `${i + 1}. 🏆 ${milestone.name}
+   Event: ${milestone.event}
+   Date: ${milestone.date}
+   Description: ${milestone.description}`;
+          if (milestone.proof && milestone.proof.trim() !== "") {
+            str += `\n   Proof: <a href="${milestone.proof}" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">${milestone.proof}</a>`;
+          }
+          return str;
+        })
+        .join("\n\n");
     } else if (command === "clear") {
       setHistory([{ type: "output", text: welcomeMessage }]);
       return;
@@ -159,7 +172,6 @@ Download: <a href="https://example.com/resume.pdf" target="_blank" rel="noopener
     } else {
       output = `Command not found: ${command}`;
     }
-
     typeOutput(output);
   };
 
@@ -181,12 +193,9 @@ Download: <a href="https://example.com/resume.pdf" target="_blank" rel="noopener
 
   return (
     <div className="h-full flex flex-col bg-black text-green-400 font-mono text-sm border border-green-600 rounded-lg overflow-hidden">
-      {/* Top nav bar */}
       <div className="bg-black border-b border-green-600 p-2 text-green-400">
-        help | about | projects | skills | experience | contact | education | certifications | resume | clear
+        help | about | projects | skills | experience | contact | education | certifications | milestones | resume | clear
       </div>
-
-      {/* Scrollable terminal content */}
       <div
         className="flex-1 overflow-y-auto p-3 whitespace-pre-wrap leading-relaxed"
         onClick={() => terminalInputRef.current.focus()}
@@ -202,8 +211,6 @@ Download: <a href="https://example.com/resume.pdf" target="_blank" rel="noopener
             )}
           </div>
         ))}
-
-        {/* Live input line */}
         <div className="mt-6">
           <span className="text-blue-400">prajjwal@portfolio</span>:~$
           <span
@@ -215,6 +222,7 @@ Download: <a href="https://example.com/resume.pdf" target="_blank" rel="noopener
           />
           <span className="animate-pulse">█</span>
         </div>
+        <div ref={terminalEndRef} />
       </div>
     </div>
   );
