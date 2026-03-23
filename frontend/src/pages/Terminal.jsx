@@ -150,7 +150,7 @@ clear           - Clear terminal screen`;
     } else if (command === "resume") {
       output = `📄 Resume Details:
 Last Updated: <span style="color:#00ff00;">July 15, 2025</span>
-Download: <a href="https://drive.google.com/file/d/17IqU41qBD-CEP85HaqdOMvES38lYHWD0/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">https://drive.google.com/file/d/17IqU41qBD-CEP85HaqdOMvES38lYHWD0/view?usp=sharingf</a>`;
+Download: <a href="https://drive.google.com/file/d/1rBPv2-D1sdoaJJgytj7SftDT53ThNYXi/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="color:#00afff; text-decoration: underline;">https://drive.google.com/file/d/17IqU41qBD-CEP85HaqdOMvES38lYHWD0/view?usp=sharingf</a>`;
     } else if (command === "milestones") {
       output = milestones
         .map((milestone, i) => {
