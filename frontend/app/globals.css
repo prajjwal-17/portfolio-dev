@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-term-bg: var(--term-bg);
+  --color-term-fg: var(--term-fg);
+  --color-term-dim: var(--term-dim);
+  --color-term-accent: var(--term-accent);
+  --color-term-muted: var(--term-muted);
+
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-rule: var(--rule);
+  --color-leaf: var(--leaf);
+  --color-leaf-inv: var(--leaf-inv);
+
+  --font-display: var(--font-display-face), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-body-face), ui-sans-serif, system-ui, sans-serif;
+  --font-label: var(--font-label-face), ui-monospace, monospace;
+}
+
+/* Recruiter view and project pages: light by default, dark with data-site-theme="dark".
+   --leaf-inv is the accent used on inverted (ink-colored) blocks. */
+:root {
+  --paper: #f3f0e8;
+  --paper-2: #e9e5da;
+  --ink: #151515;
+  --ink-2: #55524b;
+  --rule: #cfc9ba;
+  --leaf: #15803d;
+  --leaf-inv: #4ade80;
+}
+[data-site-theme="dark"] {
+  --paper: #0d0e0c;
+  --paper-2: #181a16;
+  --ink: #edeae0;
+  --ink-2: #a5a298;
+  --rule: #30332d;
+  --leaf: #4ade80;
+  --leaf-inv: #15803d;
+}
+
+/* Terminal themes, switched with the `theme` command or the header toggle */
+:root {
+  --term-bg: #000000;
+  --term-fg: #4ade80;
+  --term-dim: #16a34a;
+  --term-accent: #60a5fa;
+  --term-muted: #6b7280;
+  --term-glow: rgba(74, 222, 128, 0.35);
+}
+[data-theme="amber"] {
+  --term-fg: #fbbf24;
+  --term-dim: #b45309;
+  --term-accent: #fb923c;
+  --term-glow: rgba(251, 191, 36, 0.35);
+}
+[data-theme="ice"] {
+  --term-bg: #020617;
+  --term-fg: #7dd3fc;
+  --term-dim: #0369a1;
+  --term-accent: #f0abfc;
+  --term-glow: rgba(125, 211, 252, 0.35);
+}
+[data-theme="mono"] {
+  --term-fg: #e5e5e5;
+  --term-dim: #525252;
+  --term-accent: #ffffff;
+  --term-glow: rgba(255, 255, 255, 0.2);
+}
+[data-theme="paper"] {
+  --term-bg: #f3f0e8;
+  --term-fg: #1c1917;
+  --term-dim: #a8a29e;
+  --term-accent: #15803d;
+  --term-muted: #78716c;
+  --term-glow: transparent;
+}
+
+body {
+  background: var(--term-bg);
+  color: var(--term-fg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.term-link {
+  color: var(--term-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.term-ok {
+  color: var(--term-accent);
+}
+.term-muted {
+  color: var(--term-muted);
+}
+
+/* CRT look: phosphor glow plus static scanlines. No flicker. */
+.crt {
+  position: relative;
+  text-shadow: 0 0 6px var(--term-glow);
+}
+.crt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.18) 3px
+    ),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.35) 100%);
+}
+[data-theme="paper"] .crt::after {
+  display: none;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+.caret {
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+/* Recruiter view: scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: perspective(900px) translateY(28px) rotateX(8deg);
+  transform-origin: 50% 100%;
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .caret {
+    animation: none;
+  }
+}

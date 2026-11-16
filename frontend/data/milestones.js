@@ -1,4 +1,3 @@
-// utils/awards.js
 const milestones = [
   {
   name: "Pentathon 2.0 - Datathon",

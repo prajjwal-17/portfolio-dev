@@ -1,6 +1,8 @@
+"use client";
+
 import React, { useRef, useEffect } from "react";
 
-export default function LeftPanel() {
+export default function IdCardFallback() {
   const swingRef = useRef(null);
 
   // 3D rotation state (radians)
@@ -206,7 +208,7 @@ export default function LeftPanel() {
 
 return (
   <div
-    className="min-h-screen bg-black flex flex-col justify-start items-center pt-6"
+    className="h-full flex flex-col justify-start items-center pt-6"
     style={{ perspective: 1200, userSelect: "none", touchAction: "none" }}
   >
     {/* Swing container: strap + card rotate together around top-center */}
@@ -297,7 +299,7 @@ return (
       className="mt-4 text-gray-500 text-sm text-center select-none"
       style={{ transform: "translateZ(8px)" }}
     >
-      [click on it to interact with 3D model]
+      [drag the card]
     </div>
   </div>
 );
