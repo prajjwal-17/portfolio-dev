@@ -12,7 +12,7 @@ const profile = {
   resume: {
     lastUpdated: "November 17, 2026",
     drive:
-      "https://drive.google.com/file/d/1jG5baW1IsPfeQVD4qs0XhWMi69YCRfS-/view?usp=sharing",
+      "https://drive.google.com/file/d/1cbJoxrTpvbdPJh5fGB3Yvc39VSB4BxFf/view?usp=drivesdk",
     local: "/resume.pdf",
   },
   education: [
